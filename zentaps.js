@@ -129,7 +129,7 @@
 
 		// Global handler which creates touchend handlers on the individual elements being touched:
 		addEventListener(win, "touchstart", function (event) {
-			if (event.targetTouches.length < 2) { // only single finger
+			if (event.targetTouches && event.targetTouches.length < 2) { // only single finger
 				var tel = touchendListener(event)
 				var elem = event.target
 				addEventListener(elem, "touchend", tel)
