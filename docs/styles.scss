@@ -1,0 +1,82 @@
+@import "../../../zentheme/zenstyles.scss";
+
+/*	p, .test { font-family: sans-serif; }*/
+body { 
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* hide the flashing highlight on new iOS */
+	/*-webkit-touch-callout: none; -webkit-text-size-adjust: none; -webkit-user-select: none; -webkit-highlight: none;*/
+//	background: #f06;
+//	color: #fff;
+//	padding: 2em 1em;
+}
+
+header, 
+#test {
+	text-align: center;
+}
+
+a, button, label, input {
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
+input[type=text], select {
+	font-size: 1em;
+}
+.test {
+	display: inline-block;
+	margin: 0.5em auto;
+	padding: 0.5em;
+	width: 90%;
+	background-color: $c-lightgray;
+	border: 0.1em dotted #fff;
+	text-align: center; 
+	cursor: pointer;
+/*		transition: background 0.23s;*/
+}
+
+.speed-container {
+	position: fixed;
+	top: 1em;
+	left: 1em;
+	background-color: $c-white;
+	color: $c-gray;
+	padding: 0.25em;
+	border: 1px solid $c-gray;
+	border-radius: 0.25em;
+	opacity: 0.75;
+	@media screen and (min-width: 40em) {
+		top: 7em;
+	}
+}
+
+#speed {
+	width: 2em;
+	padding: 0;
+	border: none;
+	text-align: center;
+	font-size: 2em;
+	font-family: monospace; 
+	color: $c-gray;
+	&.was-good {
+		color: green;
+	}
+	&.was-slow {
+		color: red;
+	}
+}
+
+.help {
+	font-size: 1.25em;
+	margin: 1.5em 0;
+	font-style: italic;
+}
+
+
+@media screen and (min-width: 40em) {
+	header {
+		text-align: right;
+	}
+	.test {
+		font-size: 1.25em;
+		margin: 1em auto;
+	}
+}

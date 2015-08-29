@@ -1,0 +1,174 @@
+<!doctype html>
+
+<!-- Description and demo for https://github.com/zengabor/zentaps -->
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Zentaps - The 300ms Tap Delay Killer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="twitter:site" content="@zengabor">
+	<meta name="twitter:creator" content="@zengabor">
+	<meta name="twitter:card" content="summary">
+	<meta property="og:url" content="http://zengabor.github.io/zentaps/">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Zentaps">
+	<meta property="og:title" content="Zentaps">
+	<link rel="author" href="http://www.gaborlenard.com/">
+<!-- @import ../../../zentheme/_googlefonts -->
+	<meta name="theme-color" content="#eee9e3">
+	<link rel="icon" sizes="16x16" href="zen-16.png" type="image/png">
+	<link rel="icon" sizes="192x192" href="zen-192.png" type="image/png">
+	<link rel="icon" sizes="32x32" href="zen-32.png" type="image/png">
+	<!--[if lt IE 9]>
+		<script>"header main footer nav section figure figcaption time".replace(/\w+/g,function(n){document.createElement(n)})</script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" type="text/css" href="ie.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<![endif]-->
+	<style><!-- @import ../../../zentheme/googlefonts.css -->z{}</style>
+	<script><!-- @include ../../../zenfonts/dist/zenfonts-min.js --></script>
+	<script><!-- @include ../../../zentheme/googlefonts-min.js --></script>
+	<script async src="https://www.google-analytics.com/analytics.js"></script>
+	<script>
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)}
+	ga.l=+new Date
+	ga('create', 'UA-66867856-2', 'auto')
+	ga('send', 'pageview')
+	</script>
+</head>
+
+<body>
+	
+	<header>
+		<a class="logotype" href="https://github.com/zengabor/zentaps">
+			<h1>Zentaps</h1>
+			github.com/zengabor/zentaps
+		</a>
+		<nav>
+			<a href="#about">About</a>
+			<a href="#install">Install</a>
+			<a href="#test">Test</a>
+			<a href="#license">License</a>
+		</nav>
+	</header>
+
+	<main id="main">
+
+		<section class="hero">
+
+			<!-- @include README/hero.html -->
+
+			<a class="hero-button" href="https://github.com/zengabor/zentaps">View Zentaps on GitHub</a>
+
+		</section>
+
+
+
+<!-- @include README/about.html -->
+
+<!-- @include README/install.html -->
+		
+		<section id="test">
+
+			<a href="#test"><div class="speed-container" style="display: none">SPEED<br><input id="speed" type="text" value="…" readonly></div></a>
+			
+			<h2>Quick Tests</h2>
+
+			<p class="help">Tap these items in a touch-capable browser:</p>
+
+			<div class="">
+
+				<div class="test" id="test-a">A simple DIV</div>
+
+				<a href="#test"><div class="test" id="test-b">A DIV wrapped in a link</div></a>
+
+				<label class="test"><input type="checkbox" id="test-c"> A checkbox in a label</label>
+
+				<label class="test">Textbox in a label: <input type="text" id="test-d"></label>
+
+				<label class="test">
+					Dropdown in a label: 
+					<select id="test-e">
+						<option>First options</option>
+						<option>Second options</option>
+						<option>Third options</option>
+					</select>
+				</label>
+		
+			</div>
+
+		</section>
+
+
+<!-- @include README/license.html -->
+
+
+<!-- @include ../../../zentheme/_about-me -->
+	
+		<p>Other projects by me:</p>
+
+		<!-- @include README/projects.html -->
+	
+	</main>
+
+	<footer>
+		<div style="float:right"><a href="#">Scroll Back to Top &uarr;</a></div>
+		<small>
+			&copy; 2015 Gabor Lenard
+		</small>
+	</footer>
+
+	<script type="application/javascript">
+	
+		if ("ontouchend" in window) {
+			
+			var speed = document.getElementById("speed")
+			speed.parentElement.style.display = "inline-block"
+
+			function watch(elem) {
+				var touchendTime
+				var clickHandler = function (event) {
+					var measure = Date.now() - touchendTime
+					speed.value = measure
+					speed.className = measure < 300 ? "was-good" : "was-slow"
+					event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
+				}
+				elem.addEventListener("touchend", function () {
+					touchendTime = Date.now()
+					speed.value = "…"
+					speed.className = ""
+					elem.addEventListener("click", clickHandler, false)
+					setTimeout(function () { elem.removeEventListener("click", clickHandler, false) }, 500)
+				}, false)
+			}
+	
+			watch(document.getElementById("test-a"))
+			watch(document.getElementById("test-b"))
+
+			var c = document.getElementById("test-c")
+			watch(c)
+			watch(c.parentElement)
+
+			var d = document.getElementById("test-d")
+			watch(d)
+			watch(d.parentElement)
+
+			var e = document.getElementById("test-e")
+			watch(e)
+			watch(e.parentElement)
+
+		}
+
+	</script>
+
+	<script src="zentaps.js"></script>
+
+	<script src="zenscroll-min.js"></script>
+
+</body>
+</html>
+
