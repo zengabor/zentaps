@@ -1,0 +1,172 @@
+<!doctype html>
+
+<!-- Description and demo for https://github.com/zengabor/zentaps -->
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Zentaps - The 300ms Tap Delay Killer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="twitter:site" content="@zengabor">
+	<meta name="twitter:creator" content="@zengabor">
+	<meta name="twitter:card" content="summary">
+	<meta property="og:url" content="http://zengabor.github.io/zentaps/">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Zentaps">
+	<meta property="og:title" content="Zentaps">
+	<link rel="author" href="http://www.gaborlenard.com/">
+	<link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet" type="text/css">
+	<meta name="theme-color" content="#eee9e3">
+	<link rel="icon" sizes="16x16" href="zen-16.png" type="image/png">
+	<link rel="icon" sizes="192x192" href="zen-192.png" type="image/png">
+	<link rel="icon" sizes="32x32" href="zen-32.png" type="image/png">
+	<!--[if lt IE 9]>
+		<script>"header main footer nav section figure figcaption time".replace(/\w+/g,function(n){document.createElement(n)})</script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" type="text/css" href="ie.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<![endif]-->
+	<style>		/* Hides content during load to fix FOUT on IE: */
+		.loading body {
+			visibility: hidden;
+		}
+
+		/* Font and fallback for body text: */
+		body, .play-button {
+			font-family: "Alegreya Sans", sans-serif;
+		}
+		nav a, h2, h3, strong, .play-button {
+			font-weight: 700;
+		}
+		h3 {
+			font-style: italic;
+		}
+		.fallback body {
+			font-family: "Avenir Next", Avenir, "Segoe UI", Calibri, "Helvetica Neue", Helvetica, sans-serif;
+		}
+		.fallback h2, .fallback strong {
+			font-weight: bold;
+		}
+
+		/* Font and fallback for the logotype: */
+		.logotype h1 {
+			font-family: "Merienda One", serif;
+/*			font-style: italic;*/
+			font-weight: normal;
+		}
+		.fallback-logotype .logotype h1 {
+			font-family: "Iowan Old Style", "Hoefler Text", Literata, "Droid Serif", serif;
+			font-style: italic;
+		}
+
+		/* Font and fallback for the code snippets: */
+		code {
+			font-family: "PT Mono", monospace;
+		}
+		.fallback-mono code {
+			font-family: monospace;
+		}
+z{}</style>
+	<script>this.zenfonts=function(e){"use strict";var t="serif",n=e.documentElement,i=function o(e){var t=e.parentNode;t&&t.removeChild(e)},a=function s(e){e&&(n.className=n.className.replace(new RegExp("(^|\\s)*"+e+"(\\s|$)*","g")," "))};return function f(o,s){if(o instanceof Array||(o=[o]),s=s||{},!e.body)return setTimeout(function(){f(o,s)},1);for(var r=[],c=o.length;c--;){var l=o[c];"string"==typeof l&&(l={family:l});var u=l.family,m=e.createElement("div");m.style.cssText="position:absolute;top:-999px;left:-999px;visibility:hidden;white-space:nowrap;font-size:20em;font-family:"+t+";"+l.style||"",m.appendChild(e.createTextNode("// Zenfonts([{}]);")),e.body.appendChild(m),m._width=m.offsetWidth,m.style.fontFamily="'"+u+"',"+t,m._width!==m.offsetWidth?i(m):r.push(m)}var d=s.fallbackClass,p=function x(){a(d),s.onSuccess&&s.onSuccess()};if(0===r.length)return p();var h=s.loadingClass;h&&(n.className+=" "+h);var v=function N(){a(h)},y=s.timeout||2222;if(d){var w=setTimeout(function b(){v(),n.className+=" "+d},y),g=p;p=function(){clearTimeout(w),g()}}var T=(new Date).getTime()+Math.max(y,s.swap||9999);!function C(e){setTimeout(function(){var t=(new Date).getTime()>=T;t&&s.onSwap&&s.onSwap();for(var n=r.length;n--;){var a=r[n];(t||a.offsetWidth!==a._width)&&(r.splice(n,1),i(a))}0===r.length?(t||p(),v()):C(1.5*e)},e)}(9)}}(document);</script>
+	<script>zenfonts("Merienda One",{fallbackClass:"fallback-logotype",onSwap:function(){zenfonts("Merienda One",{timeout:3e4})}}),zenfonts(["Alegreya Sans",{family:"Alegreya Sans",style:"font-weight: 400; font-style: italic"},{family:"Alegreya Sans",style:"font-weight: 700"},{family:"Alegreya Sans",style:"font-weight: 700; font-style: italic"}],{loadingClass:"loading",fallbackClass:"fallback",timeout:1e3,swap:1e3}),zenfonts("PT Mono",{fallbackClass:"fallback-mono",timeout:1e3});</script>
+	<script async src="https://www.google-analytics.com/analytics.js"></script>
+	<script>
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)}
+	ga.l=+new Date
+	ga('create', 'UA-66867856-2', 'auto')
+	ga('send', 'pageview')
+	</script>
+</head>
+
+<body>
+	
+	<div class="speed-container">SPEED<br><input id="speed" type="text" value="…" readonly></div>
+
+	<p class="help">Tap these items:</p>
+
+	<div class="">
+
+		<div class="test" id="test-a">A simple DIV</div>
+
+		<a href="#test"><div class="test" id="test-b">A DIV wrapped in a link</div></a>
+
+		<label class="test"><input type="checkbox" id="test-c"> A checkbox in a label</label>
+
+		<label class="test">Textbox in a label: <input type="text" id="test-d"></label>
+
+		<label class="test">
+			Dropdown in a label: 
+			<select id="test-e">
+				<option>First options</option>
+				<option>Second options</option>
+				<option>Third options</option>
+			</select>
+		</label>
+		
+		<p>
+			A regular link (not test): <a href="http://zenvite.com/">zenvite.com</a>
+		</p>
+
+		<p>&nbsp;</p>
+
+	</div>
+
+
+<script type="application/javascript">
+
+	var speed = document.getElementById("speed")
+
+	var touchendTime
+	
+	var captureStartTime = function (event) {
+		touchendTime = Date.now()
+		speed.value = "…"
+	}
+	
+	var handleClick = function (event) {
+		if (touchendTime) {
+			var measure = Date.now() - touchendTime
+			speed.value = measure
+			speed.className = measure < 300 ? "was-good" : "was-slow"
+		}
+		event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
+	}
+
+	var a = document.getElementById("test-a")
+	a.addEventListener("touchend", captureStartTime, false)
+	a.addEventListener("click", handleClick, false)
+
+	var b = document.getElementById("test-b")
+	b.addEventListener("touchend", captureStartTime, false)
+	b.addEventListener("click", handleClick, false)
+	
+	var c = document.getElementById("test-c")
+	c.addEventListener("touchend", captureStartTime, false)
+	c.addEventListener("click", handleClick, false)
+	c.parentElement.addEventListener("touchend", captureStartTime, false)
+	c.parentElement.addEventListener("click", handleClick, false)
+
+	var d = document.getElementById("test-d")
+	d.addEventListener("touchend", captureStartTime, false)
+	d.addEventListener("click", handleClick, false)
+	d.parentElement.addEventListener("touchend", captureStartTime, false)
+	d.parentElement.addEventListener("click", handleClick, false)
+
+	var e = document.getElementById("test-e")
+	e.addEventListener("touchend", captureStartTime, false)
+	e.addEventListener("click", handleClick, false)
+	e.parentElement.addEventListener("touchend", captureStartTime, false)
+	e.parentElement.addEventListener("click", handleClick, false)
+
+</script>
+
+<script src="zentaps.js"></script>
+
+</body>
+</html>
+
