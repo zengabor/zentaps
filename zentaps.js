@@ -95,8 +95,9 @@
 
 				// This is a handler for the natural click, which happens in Chrome and on iOS on a slightly longer tap.
 				// The handler then cleans up and lets the event follow its natural course (tao).
-				browserClickDetector = function () {
-					console.log(Date.now(), "NATURAL BROWSER CLICK", elem.id || elem.tagName)
+				browserClickDetector = function (event) {
+					console.log(Date.now(), "NATURAL BROWSER CLICK", elem.id || elem.tagName, event.pageX, event.pageY)
+					log(Date.now() + " NATURAL BROWSER CLICK " + elem.id || elem.tagName + " " + event.pageX + "x" + event.pageY)
 					removeEventListener(win, "click", browserClickDetector)
 					clearTimeout(zenClicker)
 				}
@@ -111,7 +112,8 @@
 						ghostEvent.preventDefault()
 						// ghostEvent.stopPropagation()
 						retireGhostBuster()
-						console.log(Date.now(), "GHOST KILLED", elem.id || elem.tagName, ghostEvent.pageX, ghostEvent.pageY)
+						console.log(Date.now(), "GHOST BUSTED", elem.id || elem.tagName, ghostEvent.pageX, ghostEvent.pageY)
+						log(Date.now() + " GHOST BUSTED " + elem.id || elem.tagName + " " + ghostEvent.pageX + "x" + ghostEvent.pageY)
 						// return false
 					// } else {
 					// 	console.log(Date.now() + " ? not the same position")
