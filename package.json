@@ -1,0 +1,18 @@
+{
+	"name": "zentaps",
+	"version": "0.5.0",
+	"description": "Kills the 300ms tap delay (old Android not yet supported)",
+	"main": "zentaps.js",
+	"files": ["zentaps.js", "zentaps-min.js"],
+	"homepage": "https://zengabor.github.io/zentaps/",
+	"keywords": ["performance", "mobile", "tap", "300ms", "ux"],
+	"license": "Unlicense",
+	"author": "Gabor Lenard (http://www.gaborlenard.com)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zengabor/zentaps.git"
+	},
+	"bugs": {
+		"url": "https://github.com/zengabor/zentaps/issues"
+	}
+}
