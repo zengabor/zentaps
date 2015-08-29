@@ -85,83 +85,227 @@ z{}</style>
 
 <body>
 	
-	<div class="speed-container">SPEED<br><input id="speed" type="text" value="…" readonly></div>
+	<header>
+		<a class="logotype" href="https://github.com/zengabor/zentaps">
+			<h1>Zentaps</h1>
+			github.com/zengabor/zentaps
+		</a>
+		<nav>
+			<a href="#about">About</a>
+			<a href="#install">Install</a>
+			<a href="#test">Test</a>
+			<a href="#license">License</a>
+		</nav>
+	</header>
 
-	<p class="help">Tap these items:</p>
+	<main id="main">
 
-	<div class="">
+		<section class="hero">
 
-		<div class="test" id="test-a">A simple DIV</div>
+			<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="makeyourwebsitefeellikeanativenbspapp">Make Your Web Site Feel Like a Native&nbsp;App</h1>
 
-		<a href="#test"><div class="test" id="test-b">A DIV wrapped in a link</div></a>
+<p>Zentaps automatically removes the 300&nbsp;ms delay on&nbsp;mobile.</p>
 
-		<label class="test"><input type="checkbox" id="test-c"> A checkbox in a label</label>
+<p>Vanilla JavaScript. 442 bytes.</p>
 
-		<label class="test">Textbox in a label: <input type="text" id="test-d"></label>
+</body>
+</html>
 
-		<label class="test">
-			Dropdown in a label: 
-			<select id="test-e">
-				<option>First options</option>
-				<option>Second options</option>
-				<option>Third options</option>
-			</select>
-		</label>
+			<a class="hero-button" href="https://github.com/zengabor/zentaps">View Zentaps on GitHub</a>
+
+		</section>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h2 id="about">About</h2>
+
+<p>Zentaps is a tiny JavaScript module which automatically removes the 300 miliseconds tap delay on iOS devices.</p>
+
+<p>Features:</p>
+
+<ul>
+<li>Taps take less than 15ms instead of 300ms.</li>
+<li>Supports iOS Safari and browsers in iOS apps.</li>
+<li>Support for old Android browsers (2.3+) is coming later.</li>
+<li>Support for Windows Phone is coming later (if needed).</li>
+<li>Support isn’t needed for Chrome which already fixed the 300ms tap delay. (I wish Apple would do the same. The double-tap zoom &amp; double-tap scroll are relics of the past.)</li>
+<li>Support isn’t needed for browsers that don’t support touch events (e.g., desktop browsers without touch screens).</li>
+<li>442 bytes minimized &amp; gzipped.</li>
+</ul>
+
+<p>Zentaps observes touch events in the background. If there is no click event in a timely manner (that is, within 10ms) then Zentaps fires a click event and kills the ghost click that comes after 300ms. Of course, if the browser fires the click within 10ms (e.g., when you tapped a little bit longer on iOS) then Zentaps doesn’t have to do anything.</p>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h2 id="install">Install</h2>
+
+<p><a href="https://github.com/zengabor/zentaps/archive/latest.zip">Download Zentaps</a> and include it into your page. A good place is at the very bottom, just before the closing <code>&lt;/body&gt;</code> tag. For&nbsp;example:</p>
+
+<pre><code class="html">    ...
+    &lt;script src=&quot;zentaps-min.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>There is nothing else to do. Zentaps automatically detects touch-capable browsers that need a speed-up.</p>
+
+<p>You can also use npm to install Zenscroll:</p>
+
+<pre><code>npm install zentaps
+</code></pre>
+
+</body>
+</html>
+		
+		<section id="test">
+
+			<a href="#test"><div class="speed-container" style="display: none">SPEED<br><input id="speed" type="text" value="…" readonly></div></a>
+			
+			<h2>Quick Tests</h2>
+
+			<p class="help">Tap these items in a touch-capable browser:</p>
+
+			<div class="">
+
+				<div class="test" id="test-a">A simple DIV</div>
+
+				<a href="#test"><div class="test" id="test-b">A DIV wrapped in a link</div></a>
+
+				<label class="test"><input type="checkbox" id="test-c"> A checkbox in a label</label>
+
+				<label class="test">Textbox in a label: <input type="text" id="test-d"></label>
+
+				<label class="test">
+					Dropdown in a label: 
+					<select id="test-e">
+						<option>First options</option>
+						<option>Second options</option>
+						<option>Third options</option>
+					</select>
+				</label>
+		
+			</div>
+
+		</section>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h2 id="license">License</h2>
+
+<p><a href="http://unlicense.org">Public Domain</a>. You can do with it whatever you want and I am not responsible for anything.</p>
+
+</body>
+</html>
+
+
+
+	<div class="about-me">
+		
+		<h2>About Me</h2>
 		
 		<p>
-			A regular link (not test): <a href="http://zenvite.com/">zenvite.com</a>
+			<a href="http://www.gaborlenard.com/"><img class="avatar" src="zengabor.jpg" alt="Gabor Lenard">My name is Gabor Lenard.</a> 
+			You can find me on Twitter as <a href="https://twitter.com/zengabor">@zengabor</a>.
+			I am a product designer &amp; developer, currently building <a href="http://zenvite.com/">zenvite.com</a>. It never ceases to amaze me how people share their knowledge and what they make. Their work empowers us all. This here, however humble, is my way of contributing to this community &amp; the wonderful <a href="https://adactio.com/journal/6692">continuum</a> we call the world&nbsp;wide&nbsp;web.
 		</p>
 
-		<p>&nbsp;</p>
-		
-		<div>
-			<textarea id="log" style="width: 80%" rows="80" cols="20"></textarea> 
-		</div>
-		
-		<a href="http://www.randomsnippets.com/2008/03/05/simulate-a-button-click-via-javascript/">click() test</a>
-
 	</div>
-
-
-<script type="application/javascript">
-
-	var speed = document.getElementById("speed")
-
-	function watch(elem) {
-		var touchendTime
-		var clickHandler = function (event) {
-			var measure = Date.now() - touchendTime
-			speed.value = measure
-			speed.className = measure < 300 ? "was-good" : "was-slow"
-			event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
-		}
-		elem.addEventListener("touchend", function () {
-			touchendTime = Date.now()
-			speed.value = "…"
-			speed.className = ""
-			elem.addEventListener("click", clickHandler, false)
-			setTimeout(function () { elem.removeEventListener("click", clickHandler, false) }, 500)
-		}, false)
-	}
 	
-	watch(document.getElementById("test-a"))
-	watch(document.getElementById("test-b"))
+		<p>Other projects by me:</p>
 
-	var c = document.getElementById("test-c")
-	watch(c)
-	watch(c.parentElement)
+		<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<ul>
+<li><a href="https://github.com/zengabor/zenfonts">Zenfonts</a>, a tiny JavaScript helper for @font-face loading.</li>
+<li><a href="https://github.com/zengabor/zenscroll">Zenscroll</a>, a JavasScript module to smooth-scroll web pages and container elements.</li>
+<li><a href="http://zenvite.com/">Zenvite.com</a>: Create beautiful invitation pages &amp; get everybody on the same page.</li>
+</ul>
 
-	var d = document.getElementById("test-d")
-	watch(d)
-	watch(d.parentElement)
+</body>
+</html>
+	
+	</main>
 
-	var e = document.getElementById("test-e")
-	watch(e)
-	watch(e.parentElement)
+	<footer>
+		<div style="float:right"><a href="#">Scroll Back to Top &uarr;</a></div>
+		<small>
+			&copy; 2015 Gabor Lenard
+		</small>
+	</footer>
 
-</script>
+	<script type="application/javascript">
+	
+		if ("ontouchend" in window) {
+			
+			var speed = document.getElementById("speed")
+			speed.parentElement.style.display = "inline-block"
 
-<script src="zentaps.js"></script>
+			function watch(elem) {
+				var touchendTime
+				var clickHandler = function (event) {
+					var measure = Date.now() - touchendTime
+					speed.value = measure
+					speed.className = measure < 300 ? "was-good" : "was-slow"
+					event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
+				}
+				elem.addEventListener("touchend", function () {
+					touchendTime = Date.now()
+					speed.value = "…"
+					speed.className = ""
+					elem.addEventListener("click", clickHandler, false)
+					setTimeout(function () { elem.removeEventListener("click", clickHandler, false) }, 500)
+				}, false)
+			}
+	
+			watch(document.getElementById("test-a"))
+			watch(document.getElementById("test-b"))
+
+			var c = document.getElementById("test-c")
+			watch(c)
+			watch(c.parentElement)
+
+			var d = document.getElementById("test-d")
+			watch(d)
+			watch(d.parentElement)
+
+			var e = document.getElementById("test-e")
+			watch(e)
+			watch(e.parentElement)
+
+		}
+
+	</script>
+
+	<script src="zentaps.js"></script>
+
+	<script src="zenscroll-min.js"></script>
 
 </body>
 </html>

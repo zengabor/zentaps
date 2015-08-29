@@ -1,5 +1,5 @@
 /**
- * Zentaps 1.0.0
+ * Zentaps 0.5.0
  * https://github.com/zengabor/zentaps/
  *
  * Copyright 2015 Gabor Lenard
@@ -37,18 +37,11 @@
 (function (win) {
 	"use strict"
 	
-	var logger = document.getElementById("log")
-	
-	var log = function log(message) {
-		console.log(message)
-		logger.value += message + "\n"
-	}
-
 	// The finger should not move more than this in any direction between the touchstart & touchend:
 	var offsetTolerance = 15 // pixels
 
 	// Zentaps only waits so long for the browser's click before it triggers its own click:
-	var browserClickDeadline = 9 // miliseconds
+	var browserClickDeadline = 10 // miliseconds
 
 	// Taps must be shorter than this:
 	var theLongestTap = 500 // miliseconds
@@ -71,16 +64,7 @@
 	var touchendListener = function (touchstartEvent) {
 		var listener = function (event) {
 			var elem = event.target
-			// console.log(Date.now() + " - touchendListener left the building")
-			console.log(Date.now(), "TOUCHEND", elem.id || elem.tagName, event.pageX, event.pageY)
-			log(Date.now() + " TOUCHEND " + (elem.id || elem.tagName) + " " + event.pageX + "x" + event.pageY)
 			var isSamePosition = function (newEvent) {
-				var s = (Math.abs(event.pageX - newEvent.pageX) < offsetTolerance) &&
-					(Math.abs(event.pageY - newEvent.pageY) < offsetTolerance)
-				if (!s) {
-					console.log(Date.now(), "!SAME", Math.abs(touchstartEvent.pageX - newEvent.pageX), Math.abs(touchstartEvent.pageY - newEvent.pageY), elem.id || elem.tagName, newEvent.target.id || newEvent.target.tagName)
-				}
-				return s
 				return (
 					Math.abs(touchstartEvent.pageX - newEvent.pageX) < offsetTolerance &&
 					Math.abs(touchstartEvent.pageY - newEvent.pageY) < offsetTolerance
@@ -95,9 +79,7 @@
 
 				// This is a handler for the natural click, which happens in Chrome and on iOS on a slightly longer tap.
 				// The handler then cleans up and lets the event follow its natural course (tao).
-				browserClickDetector = function (event) {
-					console.log(Date.now(), "NATURAL BROWSER CLICK", elem.id || elem.tagName, event.pageX, event.pageY)
-					log(Date.now() + " NATURAL BROWSER CLICK " + elem.id || elem.tagName + " " + event.pageX + "x" + event.pageY)
+				browserClickDetector = function () {
 					removeEventListener(win, "click", browserClickDetector)
 					clearTimeout(zenClicker)
 				}
@@ -105,31 +87,21 @@
 
 				// This makes sure that subsequent clicks from the browser are busted:
 				ghostBuster = function (ghostEvent) {
-					// console.log(Date.now() + " + ghostBuser for your service")
-					// TODO: this timeStamp trick works on iOS but I need to test it on other phones as well
+					// TODO: the timeStamp === 0 trick works on iOS but I need to test it on other phones as well
 					if (isSamePosition(ghostEvent)) { // && ghostEvent.timeStamp === 0) { 
 						ghostEvent.stopImmediatePropagation()
 						ghostEvent.preventDefault()
 						// ghostEvent.stopPropagation()
 						retireGhostBuster()
-						console.log(Date.now(), "GHOST BUSTED", elem.id || elem.tagName, ghostEvent.pageX, ghostEvent.pageY)
-						log(Date.now() + " GHOST BUSTED " + elem.id || elem.tagName + " " + ghostEvent.pageX + "x" + ghostEvent.pageY)
-						// return false
-					// } else {
-					// 	console.log(Date.now() + " ? not the same position")
 					}
 				}
 
 				zenClicker = setTimeout(function () {
-					console.log(Date.now(), "CLICK", elem.id || elem.tagName, touchstartEvent.pageX, touchstartEvent.pageY)
-					log(Date.now() + " CLICK " + elem.id || elem.tagName + " " + touchstartEvent.pageX + "x" + touchstartEvent.pageY)
 					removeEventListener(win, "click", browserClickDetector)
 					elem.click()
 					setTimeout(function () { addEventListener(win, "click", ghostBuster) }, 1)
-					setTimeout(function () { retireGhostBuster() /*; console.log(Date.now() + " - ghostBuster left the building") */ }, ghostTime)
+					setTimeout(retireGhostBuster, ghostTime)
 				}, browserClickDeadline)
-			} else {
-				console.log(Date.now(), "NOT THE SAME", elem.id || elem.tagName)
 			}
 		}
 		return listener
@@ -144,13 +116,7 @@
 				var tel = touchendListener(event)
 				var elem = event.target
 				addEventListener(elem, "touchend", tel)
-				console.log(Date.now(), "TOUCHSTART", elem.id || elem.tagName, event.pageX, event.pageY)
-				log(Date.now() + " TOUCHSTART " + elem.id || elem.tagName + " " + event.pageX + "x" + event.pageY)
-				// elemRecentlyTouched = elem
-				// setTimeout(function () { elemRecentlyTouched = null }, ghostTime)
-				setTimeout(function () { removeEventListener(elem, "touchend", tel)
-					console.log(Date.now(), "EXIT", elem.id || elem.tagName)
-				}, theLongestTap)
+				setTimeout(function () { removeEventListener(elem, "touchend", tel) }, theLongestTap)
 			}
 		})
 	}
