@@ -121,48 +121,37 @@ z{}</style>
 
 	var speed = document.getElementById("speed")
 
-	var touchendTime
-	
-	var captureStartTime = function (event) {
-		touchendTime = Date.now()
-		speed.value = "…"
-		speed.className = ""
-	}
-	
-	var handleClick = function (event) {
-		if (touchendTime) {
+	function watch(elem) {
+		var touchendTime
+		var clickHandler = function (event) {
 			var measure = Date.now() - touchendTime
 			speed.value = measure
 			speed.className = measure < 300 ? "was-good" : "was-slow"
+			event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
 		}
-		event.target.style.backgroundColor = event.target.style.backgroundColor ? "" : "Green"
+		elem.addEventListener("touchend", function () {
+			touchendTime = Date.now()
+			speed.value = "…"
+			speed.className = ""
+			elem.addEventListener("click", clickHandler, false)
+			setTimeout(function () { elem.removeEventListener("click", clickHandler, false) }, 500)
+		}, false)
 	}
-
-	var a = document.getElementById("test-a")
-	a.addEventListener("touchend", captureStartTime, false)
-	a.addEventListener("click", handleClick, false)
-
-	var b = document.getElementById("test-b")
-	b.addEventListener("touchend", captureStartTime, false)
-	b.addEventListener("click", handleClick, false)
 	
+	watch(document.getElementById("test-a"))
+	watch(document.getElementById("test-b"))
+
 	var c = document.getElementById("test-c")
-	c.addEventListener("touchend", captureStartTime, false)
-	c.addEventListener("click", handleClick, false)
-	c.parentElement.addEventListener("touchend", captureStartTime, false)
-	c.parentElement.addEventListener("click", handleClick, false)
+	watch(c)
+	watch(c.parentElement)
 
 	var d = document.getElementById("test-d")
-	d.addEventListener("touchend", captureStartTime, false)
-	d.addEventListener("click", handleClick, false)
-	d.parentElement.addEventListener("touchend", captureStartTime, false)
-	d.parentElement.addEventListener("click", handleClick, false)
+	watch(d)
+	watch(d.parentElement)
 
 	var e = document.getElementById("test-e")
-	e.addEventListener("touchend", captureStartTime, false)
-	e.addEventListener("click", handleClick, false)
-	e.parentElement.addEventListener("touchend", captureStartTime, false)
-	e.parentElement.addEventListener("click", handleClick, false)
+	watch(e)
+	watch(e.parentElement)
 
 </script>
 
