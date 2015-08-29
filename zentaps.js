@@ -36,6 +36,13 @@
 
 (function (win) {
 	"use strict"
+	
+	var logger = document.getElementById("log")
+	
+	var log = function log(message) {
+		console.log(message)
+		logger.value += message + "\n"
+	}
 
 	// The finger should not move more than this in any direction between the touchstart & touchend:
 	var offsetTolerance = 15 // pixels
@@ -66,6 +73,7 @@
 			var elem = event.target
 			// console.log(Date.now() + " - touchendListener left the building")
 			console.log(Date.now(), "TOUCHEND", elem.id || elem.tagName, event.pageX, event.pageY)
+			log(Date.now() + " TOUCHEND " + (elem.id || elem.tagName) + " " + event.pageX + "x" + event.pageY)
 			var isSamePosition = function (newEvent) {
 				var s = (Math.abs(event.pageX - newEvent.pageX) < offsetTolerance) &&
 					(Math.abs(event.pageY - newEvent.pageY) < offsetTolerance)
@@ -112,6 +120,7 @@
 
 				zenClicker = setTimeout(function () {
 					console.log(Date.now(), "CLICK", elem.id || elem.tagName, touchstartEvent.pageX, touchstartEvent.pageY)
+					log(Date.now() + " CLICK " + elem.id || elem.tagName + " " + touchstartEvent.pageX + "x" + touchstartEvent.pageY)
 					removeEventListener(win, "click", browserClickDetector)
 					elem.click()
 					setTimeout(function () { addEventListener(win, "click", ghostBuster) }, 1)
@@ -134,6 +143,7 @@
 				var elem = event.target
 				addEventListener(elem, "touchend", tel)
 				console.log(Date.now(), "TOUCHSTART", elem.id || elem.tagName, event.pageX, event.pageY)
+				log(Date.now() + " TOUCHSTART " + elem.id || elem.tagName + " " + event.pageX + "x" + event.pageY)
 				// elemRecentlyTouched = elem
 				// setTimeout(function () { elemRecentlyTouched = null }, ghostTime)
 				setTimeout(function () { removeEventListener(elem, "touchend", tel)
